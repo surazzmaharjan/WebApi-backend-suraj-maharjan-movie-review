@@ -188,6 +188,36 @@ router.get('/allusers',auth.verifyUser,(req,res)=>{
     });
     });
 
+/*
+* display  all admin user
+*/
+
+router.get('/viewalladmins',(req,res)=>{
+    User.find({isAdmin:true}).then(function(user){
+
+            res.json({code:100,alluseradmin:user});
+
+    }).catch(function(e){
+
+            res.send(e)
+
+    });
+    });
+
+
+/*
+* delete  admin user details by id
+*/
+
+router.delete('/deleteadmin/:id',auth.verifyUser,auth.verifyAdmin,(req,res)=>{
+
+    User.findByIdAndDelete(req.params.id).then(function(){
+                res.json({code:100,message:"Succesfully Deleted Admin User"});
+            }).catch(function(e){
+                res.send(e)
+            });
+        });
+
 
 
 
