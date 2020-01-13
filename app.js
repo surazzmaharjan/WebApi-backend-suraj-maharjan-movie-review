@@ -6,6 +6,7 @@ const dotenv = require('dotenv').config();
 
 require('./database/mongoose');
 const userRouter = require('./routers/user');
+const movieRouter = require('./routers/movie');
 
 app.use(bodyParser.urlencoded({ extended:                                                                                                                                                                                                                                                                                                                                                                                                                                                                   false }));
 
@@ -14,6 +15,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname + "/public"));
 app.use(userRouter);
+app.use(movieRouter);
 
 
 //server port
