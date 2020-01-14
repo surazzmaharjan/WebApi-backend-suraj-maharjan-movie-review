@@ -108,5 +108,31 @@ router.delete('/movie/:id',auth.verifyUser,auth.verifyAdmin,(req,res)=>{
 
 
 
+router.get('/movie/:id',auth.verifyUser,auth.verifyAdmin,(req,res)=>{
+
+    Movie.findOne({_id:req.params.id}).then(function(movie){
+            console.log(movie);
+            res.json({code:200,singlemovie:movie});
+    }).catch(function(e){
+            res.json(e)
+    });
+});
+
+
+router.put('/movie/:id',auth.verifyUser,auth.verifyAdmin,(req,res)=>{
+    Movie.findByIdAndUpdate({_id:req.params.id},req.body).then(function(){
+         console.log(res);
+         res.status(200).json({code:200,message:"Succesfully movie updated"});
+
+    }).catch(function(e){
+
+        if (e.name === 'ValidationError'){
+             return res.status(500).json({ code:500,message: 'Movie title is already taken' })
+
+        }else{
+            return res.send(e)
+        }
+        });
+});
 
 module.exports=router;
