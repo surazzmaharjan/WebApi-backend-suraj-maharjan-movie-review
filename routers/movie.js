@@ -58,4 +58,55 @@
 
 
 
+router.get('/movie',auth.verifyUser,(req,res)=>{
+    Movie.find().then(function(movie){
+         res.json(movie);
+    }).catch(function(e){
+
+            res.json(e)
+
+    });
+    });
+
+
+router.get('/homepage/viewallmovies',(req,res)=>{
+    Movie.find().then(function(movie){
+            res.json({code:200,movielists:movie});
+    }).catch(function(e){
+
+            res.json(e)
+
+    });
+    });
+
+
+
+router.delete('/movie/:id',auth.verifyUser,auth.verifyAdmin,(req,res)=>{
+
+
+    Movie.findOne({_id:req.params.id}).then(function(found){
+        const filedes= "./public/movie/uploads/"+found.mimage;
+        fs.unlink(filedes, function (err) {
+            if (err) {
+                console.log(err);
+            }else{
+                Movie.findByIdAndDelete(found.id).then(function(){
+                    res.status(200).json({code:200,message:"Movie deleted Successfully"});
+
+                }).catch(function(e){
+                    res.status(402).json({code:402,message:"Movie Could not be deleted."});
+                });
+            }
+        });
+    }).catch(function(e){
+        res.send(e)
+    });
+
+
+
+});
+
+
+
+
 module.exports=router;
