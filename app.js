@@ -7,6 +7,8 @@ const dotenv = require('dotenv').config();
 require('./database/mongoose');
 const userRouter = require('./routers/user');
 const movieRouter = require('./routers/movie');
+const commentRouter = require('./routers/comment');
+const favouriteRouter = require('./routers/favourite');
 
 app.use(bodyParser.urlencoded({ extended:                                                                                                                                                                                                                                                                                                                                                                                                                                                                   false }));
 
@@ -16,6 +18,8 @@ app.use(express.json());
 app.use(express.static(__dirname + "/public"));
 app.use(userRouter);
 app.use(movieRouter);
+app.use(commentRouter);
+app.use(favouriteRouter);
 
 
 //server port
