@@ -24,4 +24,42 @@ router.post('/comment',auth.verifyUser, (req, res) => {
 
 
 
+
+router.get('/comment/:id',auth.verifyUser,(req,res)=>{
+
+    Comment.findOne({_id:req.params.id}).then(function(comment){
+            console.log(comment);
+            res.json(comment);
+    }).catch(function(e){
+            res.json(e)
+    });
+});
+
+router.put('/comment/:id',auth.verifyUser,(req,res)=>{
+    console.log(req.body);
+    Comment.findByIdAndUpdate({_id:req.params.id},req.body).then(function(){
+         console.log(res);
+         res.status(200).json({code:200,message:"Comment succesfully updated"});
+
+    }).catch(function(e){
+         res.send(e)
+    });
+});
+
+
+
+router.get('/comment',auth.verifyUser, (req, res, next) => {
+    Comment.find().then(function(comment){
+        res.json(comment);
+
+    }).catch(function(e){
+
+            res.json(e)
+
+    });
+    });
+
+
+
+
 module.exports=router;
