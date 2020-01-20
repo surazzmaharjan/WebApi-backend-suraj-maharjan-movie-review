@@ -60,25 +60,6 @@ router.get('/comment',auth.verifyUser, (req, res, next) => {
     });
 
 
-// router.get('/allcomments', (req, res, next) => {
-//     Comment.find().then(function(comment){
-//         res.json(comment);
-
-//     }).catch(function(e){
-
-//             res.json(e)
-
-//     });
-//     });
-
-// router.delete('/deletecomment/:id',auth.verifyUser,auth.verifyAdmin,(req,res)=>{
-
-//     Comment.findByIdAndDelete(req.params.id).then(function(){
-//                 res.status(200).json({code:200,message:"Succesfully deleted"});
-//             }).catch(function(e){
-//                 res.send(e)
-//             });
-//         });
 
 
 router.delete('/comment/:id',auth.verifyUser,(req,res)=>{
