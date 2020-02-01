@@ -40,8 +40,14 @@ describe('User Schema testing', () => {
         });
 
 
-    
-  
+    // delete individual user by id
+         it('to test the delete user is working or not', async () => {
+             const status = await User.deleteOne({_id :Object('5e3914a30a53a9246c10e092')});
+             expect(status.ok).toBe(1);
+         })
+
+
+       
     
     
 })
