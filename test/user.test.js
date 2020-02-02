@@ -64,7 +64,11 @@ describe('User Schema testing', () => {
 
      });
 
-    
+     // select all user
+     it('to test the select user is working or not', async () => {
+        const status = await User.find({});
+        expect(status.length).toBeGreaterThan(0);
+    })
 
 
     
