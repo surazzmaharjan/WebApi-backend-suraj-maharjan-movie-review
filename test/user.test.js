@@ -47,7 +47,26 @@ describe('User Schema testing', () => {
          })
 
 
-       
+        //delete all user
+         it('to test the delete user is working or not', async () => {
+             const status = await User.deleteMany();
+             expect(status.ok).toBe(1);
+         })
+
+
+    //to update user details by id
+     it('to test user the update', async () => {
+
+         return User.findOneAndUpdate({_id :Object('5e39136ac2e5682355bb1d99')}, {$set : {firstname:'moviereview'}})
+         .then((pp)=>{
+             expect(pp.firstname).toEqual('moviereview')
+         })
+
+     });
+
+    
+
+
     
     
 })
