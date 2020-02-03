@@ -43,5 +43,25 @@ describe('Feedback Schema', () => {
         });
 
     
-  
+    // select all feedback
+        it('to test the select feedback is working or not', async () => {
+            const status = await Comment.find({});
+            expect(status.length).toBeGreaterThan(0);
+        })
+
+        //to update user details by id
+    it('to test feedback the update', async () => {
+
+        return Comment.findOneAndUpdate({_id :Object('5e422403ab59a116d3164e37')}, {$set : {feedback:"updated fedback"}})
+        .then((pp)=>{
+            expect(pp.feedback).toEqual("updated fedback")
+        })
+
+    });
+
+    // delete feedback user by id
+     it('to test the delete feedback is working or not', async () => {
+         const status = await Comment.deleteOne({_id :Object('5e422403ab59a116d3164e37')});
+         expect(status.ok).toBe(1);
+     })
 })
