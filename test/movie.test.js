@@ -48,5 +48,10 @@ describe('Movie Schema', () => {
                  });
         });
 
-   
+     // select all movies
+     it('to test the select movie is working or not', async () => {
+        const status = await Movie.find({});
+        expect(status.length).toBeGreaterThan(0);
+    })
+
 })
